@@ -1,7 +1,10 @@
 import streamlit as st
 import random
+from pathlib import Path
 from datetime import date, timedelta
 
+BASE_DIR = Path(__file__).parent
+IMAGES_DIR = BASE_DIR / "images"
 
 # Page reruns - change page on first click
 # Redirect immediately if booking flag set
@@ -91,9 +94,9 @@ st.markdown(
 )
 
 # Demo image pools (6 each - we cycle through these for the 100 items)
-activity_images = [f"images/activity{i}.jpg" for i in range(1, 7)]
-restaurant_images = [f"images/restaurant{i}.jpg" for i in range(1, 7)]
-combo_images = [f"images/combo{i}.jpg" for i in range(1, 7)]
+activity_images = [str(IMAGES_DIR / f"activity{i}.jpg") for i in range(1, 7)]
+restaurant_images = [str(IMAGES_DIR / f"restaurant{i}.jpg") for i in range(1, 7)]
+combo_images = [str(IMAGES_DIR / f"combo{i}.jpg") for i in range(1, 7)]
 
 # Example allergens
 allergens_list = ["Gluten", "Dairy", "Nuts", "Shellfish", "Soy", "Eggs", "Sesame"]
@@ -644,3 +647,4 @@ elif st.session_state.page == "checkout":
         )
     else:
         st.warning("No plan selected. Please go back and select a plan.")
+
